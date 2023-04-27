@@ -1,0 +1,28 @@
+<%= form_with model: [@article, @comment] do |form| %>
+  <p>
+    <%= form.label :commenter %>
+    <%= form.text_field :commenter %>
+  </p>
+
+  <% @comment.errors.full_messages_for(:commenter).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+
+  <p>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </p>
+
+  <% @comment.errors.full_messages_for(:body).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+
+  <div>
+    <%= form.label :status %>
+    <%= form.select :status, Visible::VALID_STATUSES %>
+  </div>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

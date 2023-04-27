@@ -1,0 +1,13 @@
+<h1 class="font-bold">Article</h1>
+
+<%= render 'articles/article' %>
+
+<%= link_to "Edit Article", edit_article_path(@article) %>
+<%= link_to "Delete Article", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete the article?" } %>
+
+<h2 class="mt-4">Comments</h2>
+<%#= render @comments %>
+
+<h2 class="mt-4">Add Comment</h2>
+
+<%= render 'comments/form' %>
