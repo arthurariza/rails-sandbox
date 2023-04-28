@@ -1,0 +1,5 @@
+<%= turbo_frame_tag 'add_comment' do %>
+  <%= render 'form', article: @article, comment: @comment %>
+
+  <%= link_to 'Cancel', article_path(@article) %>
+<% end %>

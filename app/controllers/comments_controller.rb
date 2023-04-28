@@ -1,14 +1,23 @@
 class CommentsController < ApplicationController
+  def new
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.build
+  end
   def create
     @article = Article.find(params[:article_id])
     @comment = @article.comments.new(comment_params)
 
-    if @comment.save
-      redirect_to article_path @article
-    else
-      render "articles/show"
-    end
+    ExampleJob.perform_later
 
+    if @comment.save
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to article_path @article }
+      end
+
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -16,7 +25,10 @@ class CommentsController < ApplicationController
     comment = article.comments.find(params[:id])
     comment.destroy
 
-    redirect_to article_path(article), status: :see_other
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(comment) }
+      format.html { redirect_to article_path(article), status: :see_other }
+    end
   end
 
   private

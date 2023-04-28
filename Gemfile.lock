@@ -71,6 +71,7 @@ GEM
       msgpack (~> 1.2)
     builder (3.2.4)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.0)
     crass (1.0.6)
     date (3.3.3)
     debug (1.7.2)
@@ -112,6 +113,8 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.14.3-aarch64-linux)
       racc (~> 1.4)
+    nokogiri (1.14.3-arm64-darwin)
+      racc (~> 1.4)
     pg (1.5.2)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -146,8 +149,16 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis (4.8.1)
+    redis-client (0.14.1)
+      connection_pool
     reline (0.3.3)
       io-console (~> 0.5)
+    sidekiq (7.0.9)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -158,6 +169,8 @@ GEM
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     tailwindcss-rails (2.0.29-aarch64-linux)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.29-arm64-darwin)
       railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.2)
@@ -179,6 +192,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-22
 
 DEPENDENCIES
   bootsnap
@@ -187,6 +201,8 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  redis (~> 4.0)
+  sidekiq (~> 7.0)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails

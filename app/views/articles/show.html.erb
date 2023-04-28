@@ -1,13 +1,20 @@
+<%= turbo_stream_from @article %>
+
 <h1 class="font-bold">Article</h1>
 
-<%= render 'articles/article' %>
+<%= turbo_frame_tag @article do %>
+  <%= render 'articles/article' %>
 
-<%= link_to "Edit Article", edit_article_path(@article) %>
-<%= link_to "Delete Article", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete the article?" } %>
+  <%= link_to "Edit Article", edit_article_path(@article) %>
+  <%= link_to "Delete Article", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete the article?" } %>
+<% end %>
 
-<h2 class="mt-4">Comments</h2>
-<%#= render @comments %>
 
-<h2 class="mt-4">Add Comment</h2>
+<div id="comments">
+  <h2 class="mt-4">Comments</h2>
+  <%= render @comments %>
+</div>
 
-<%= render 'comments/form' %>
+<%= turbo_frame_tag 'add_comment' do %>
+  <%= link_to "Add Comment", new_article_comment_path(@article), class: 'mt-4 block' %>
+<% end %>
