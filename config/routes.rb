@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
+
+  get '/stimulus', to: 'stimulus#index'
 end
