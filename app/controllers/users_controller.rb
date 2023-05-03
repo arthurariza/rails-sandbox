@@ -3,6 +3,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      @user.send_confirmation_email!
+
       redirect_to root_path, notice: "Please check your email for confirmation instructions."
     else
       render :new, status: :unprocessable_entity

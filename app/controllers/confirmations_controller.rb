@@ -7,21 +7,20 @@ class ConfirmationsController < ApplicationController
     else
       redirect_to new_confirmation_path, alert: "We could not find a user with that email or that email has already been confirmed."
     end
+  end
 
-    def edit
-      @user = User.find_signed(params[:confirmation_token], purpose: :confirm_email)
+  def edit
+    @user = User.find_signed(params[:confirmation_token], purpose: :confirm_email)
 
-      if @user.present?
-        @user.confirm!
-
-        redirect_to root_path, notice: "Your account has been confirmed!"
-      else
-        redirect_to new_confirmation_path, alert: "Invalid token."
-      end
+    if @user.present?
+      @user.confirm!
+      redirect_to root_path, notice: "Your account has been confirmed."
+    else
+      redirect_to new_confirmation_path, alert: "Invalid token."
     end
+  end
 
-    def new
-      @user = User.new
-    end
+  def new
+    @user = User.new
   end
 end
