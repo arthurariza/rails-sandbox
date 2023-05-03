@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post "sign_up", to: "users#create"
   get "sign_up", to: "users#new"
 
+  resources :confirmations, only: [:create, :edit, :new], param: :confirmation_token
+
   root 'articles#index'
 
   get '/pages', to: 'pages#index'
