@@ -19,6 +19,13 @@ services:
     ports:
       - '6379:6379'
 
+  mailhog:
+    image: mailhog/mailhog
+    restart: always
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+
   database:
     image: postgres
     restart: always
@@ -28,6 +35,5 @@ services:
       - .env/development/database
     volumes:
       - ./tmp/postgres-data:/var/lib/postgresql/data
-
 volumes:
   postgres-data:
